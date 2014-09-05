@@ -7,21 +7,23 @@ This is a very old pager helper implementation. It predate [KnpPaginatorBundle](
 ### edit your composer.json file and add
 
 ```json
-	{
-		"require": {
-			"ecedi/pager-bundle": "dev-master",
-		},
-		"repositories": [
-			{
-				"type": "vcs",
-				"url": "https://github.com/ecedi/pager-bundle"
-			}
-		]
-	}
+{
+	"require": {
+		"ecedi/pager-bundle": "dev-master",
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/ecedi/pager-bundle"
+		}
+	]
+}
 ```
 
 ### Add VarsBundle to your application kernel
 
+
+```php
 	// app/AppKernel.php
 	public function registerBundles()
 	{
@@ -31,46 +33,46 @@ This is a very old pager helper implementation. It predate [KnpPaginatorBundle](
 			// ...
 		);
 	}
-
+```
 
 ## Usage
 
 in  a controller
 
 ```php
-	class MyController extends Controller {
-		public function indexAction(Request $request) {
-			// get pagination GET parameters from $ruest
-        	$pager = $this->get('ecedi.pager');
-        	$pager->setDefaultLimit(10);
-        	$pager->bind($request->query);
+class MyController extends Controller {
+	public function indexAction(Request $request) {
+		// get pagination GET parameters from $ruest
+		$pager = $this->get('ecedi.pager');
+		$pager->setDefaultLimit(10);
+		$pager->bind($request->query);
 
-        	// get a QueryBuilder
-        	$qb = $this->getDoctrine()->getManager()->getRepository('MyBundle:Myentity')->findAllByName(); //it returns a QueryBuilder, not a Query
+		// get a QueryBuilder
+		$qb = $this->getDoctrine()->getManager()->getRepository('MyBundle:Myentity')->findAllByName(); //it returns a QueryBuilder, not a Query
 
-        	$qb
-           		->setMaxResults($pager->getLimit())
-           		->setFirstResult($pager->getOffset())
-           	;
-        	$query = $qb->getQuery();
-        	$entitites = $query->getResult();
+		$qb
+			->setMaxResults($pager->getLimit())
+			->setFirstResult($pager->getOffset())
+		;
+		$query = $qb->getQuery();
+		$entitites = $query->getResult();
 
-        	// pagination
-        	$pager->setCount($count); //you have to manully run another query to find out the nbr of results
-        	$pager->setCurrentCount(count($entities));
-        	$pager->setArgs(array()); //this is an array of the route parameters to build urls in twig template
+		// pagination
+		$pager->setCount($count); //you have to manully run another query to find out the nbr of results
+		$pager->setCurrentCount(count($entities));
+		$pager->setArgs(array()); //this is an array of the route parameters to build urls in twig template
 
 
-			return array(
-            	'entities' => $entities,
-            	'pager' => $pager,
-			);
-		}
+		return array(
+			'entities' => $entities,
+			'pager' => $pager,
+		);
 	}
+}
 ```
 
 in a view
 
 ```jinja
-	{% include 'EcediPagerBundle:pager:prevnext.html.twig' with {'pager': page, 'route': 'a_route_name', 'anchor': 'an_anchor'} %}
+{% include 'EcediPagerBundle:pager:prevnext.html.twig' with {'pager': page, 'route': 'a_route_name', 'anchor': 'an_anchor'} %}
 ```
