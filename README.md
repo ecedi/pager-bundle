@@ -35,7 +35,6 @@ This is a very old pager helper implementation. It predate KnpLabs/KnpPaginatorB
 
 in  a controller
 
-``php
 	class MyController extends Controller {
 		public function indexAction(Request $request) {
 			// get pagination GET parameters from $ruest
@@ -65,11 +64,8 @@ in  a controller
 			);
 		}
 	}
-``
+
 
 in a view
 
-``twig
-{% include 'EcediPagerBundle:pager:prevnext.html.twig' with {'pager': page, 'route': 'a_route_name', 'anchor': 'an_anchor'} %}
-``
-
+	{% include 'EcediPagerBundle:pager:prevnext.html.twig' with {'pager': page, 'route': 'a_route_name', 'anchor': 'an_anchor'} %}
