@@ -1,0 +1,27 @@
+{# default template for pager
+    @param pager the pager instance
+    @param route a route name
+    @param anchor an anchor name added to the url
+#}
+<div class="pagination">
+{% if pager.currentCount == 0 %}
+    <p class="no-result">Aucun résultat</p>
+{% else %}
+    <p class="count ">{{ pager.currentCount }} résultat{% if pager.currentCount > 1 %}s{% endif %} sur {{ pager.count }}</p>
+    {% if pager.nbPages %}
+    <p class="pagin">
+        <a href="{{ path(route, pager.getPathArgsPageFirst) }}#{{ anchor }}" class="pager-first"><span title="Aller à la première page">&lt;&lt;</span></a>
+        <a href="{{ path(route, pager.getPathArgsPagePrev) }}#{{ anchor }}" class="pager-prev"><span title="Aller à la page précédente">&lt;</span></a>
+        {% for page,offset in pager.pageRange %}
+            {% if page == pager.currentPage %}
+                {{ page }}
+            {% else %}
+                <a href="{{ path(route, pager.getPathArgs(offset)) }}#{{ anchor }}" class="pager-jump"><span title="Aller à la page {{ page }}">{{ page }}</span></a>
+            {% endif %}
+        {% endfor %}
+        <a href="{{ path(route, pager.getPathArgsPageNext) }}#{{ anchor }}" class="pager-next"><span title="Aller à la page suivante">&gt;</span></a>
+        <a href="{{ path(route, pager.getPathArgsPageLast) }}#{{ anchor }}" class="pager-last"><span title="Aller à la dernière page">&gt;&gt;</span></a>
+    </p>
+    {% endif %}
+{% endif %}
+</div>
