@@ -1,6 +1,6 @@
 # ecedi/pager-bundle by [Agence Ecedi](http://ecedi.fr)
 
-This is a very old pager helper implementation. It predate KnpLabs/KnpPaginatorBundle which is our prefered pager bundle thoses days
+This is a very old pager helper implementation. It predate [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) which is our prefered pager bundle thoses days
 
 ## installation
 
