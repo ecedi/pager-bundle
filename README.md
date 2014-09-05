@@ -6,17 +6,19 @@ This is a very old pager helper implementation. It predate [KnpPaginatorBundle](
 
 ### edit your composer.json file and add
 
+```json
 	{
 		"require": {
 			"ecedi/pager-bundle": "dev-master",
 		},
 		"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/ecedi/pager-bundle"
-		}
+			{
+				"type": "vcs",
+				"url": "https://github.com/ecedi/pager-bundle"
+			}
 		]
 	}
+```
 
 ### Add VarsBundle to your application kernel
 
@@ -35,6 +37,7 @@ This is a very old pager helper implementation. It predate [KnpPaginatorBundle](
 
 in  a controller
 
+```php
 	class MyController extends Controller {
 		public function indexAction(Request $request) {
 			// get pagination GET parameters from $ruest
@@ -64,8 +67,10 @@ in  a controller
 			);
 		}
 	}
-
+```
 
 in a view
 
+```jinja
 	{% include 'EcediPagerBundle:pager:prevnext.html.twig' with {'pager': page, 'route': 'a_route_name', 'anchor': 'an_anchor'} %}
+```
