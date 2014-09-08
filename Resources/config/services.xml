@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="ecedi.pager" class="%ecedi.pager..class%" scope="prototype">
+        <service id="ecedi.pager" class="%ecedi.pager.class%" scope="prototype">
         </service>
     </services>
 </container>
